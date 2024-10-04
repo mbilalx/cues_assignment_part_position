@@ -14,7 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('episode_id')->constrained();
             $table->string('title');
-            $table->unsignedInteger('position');
+            $table->unsignedInteger('position')->index();
+            $table->index(['episode_id', 'position']);
             $table->timestamps();
             $table->softDeletes();
         });
