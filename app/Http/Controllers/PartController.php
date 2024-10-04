@@ -107,14 +107,13 @@ class PartController extends Controller
             ], Response::HTTP_OK);
 
         } catch (Exception $exception) {
-            Log::error($exception);
-
             if (str_contains($exception->getMessage(), 'Deadlock found')) {
                 return response()->json([
                     'message' => "Episode part update is temporarily unavailable. Please try again.",
                 ], Response::HTTP_SERVICE_UNAVAILABLE);
             }
 
+            Log::error($exception);
             return response()->json([
                 'message' => "Episode part couldn't be updated",
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
